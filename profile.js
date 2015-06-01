@@ -13,8 +13,12 @@ function get(category, username) {
 				try {
 					// Parse the data
 					var profile = JSON.parse(body);
+					// Check if category is valid
+					if (profile.points[category] === undefined)
+						printer.printError({message: "The category, " + category + ", does not exist."});
+					else
 					// Print the data
-					printer.printMessage(username, profile.badges.length, profile.points[category], category);
+						printer.printMessage(username, profile.badges.length, profile.points[category], category);
 				} catch(e) {
 				// Parse Error
 				printer.printError(e);
